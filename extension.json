@@ -1,0 +1,54 @@
+{
+	"name": "SimpleTippy",
+	"version": "1.0.0",
+	"author": [
+		"Vedmaka"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:SimpleTippy",
+	"descriptionmsg": "simpletippy-desc",
+	"license-name": "MIT",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"MessagesDirs": {
+		"SimpleTippy": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"SimpleTippyMagic": "SimpleTippy.i18n.magic.php"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\SimpleTippy\\": "src/"
+	},
+	"ResourceModules": {
+		"ext.simpletippy.core": {
+			"targets": [
+				"mobile",
+				"desktop"
+			],
+			"scripts": [
+				"modules/scripts/popper.min.js",
+				"modules/scripts/tippy-bundle.umd.min.js",
+				"modules/scripts/simpletippy.js"
+			],
+			"styles": [
+				"modules/styles/simpletippy.less"
+			]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "SimpleTippy"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\SimpleTippy\\SimpleTippyHooks"
+		}
+	},
+	"manifest_version": 2
+}
