@@ -28,16 +28,19 @@ class SimpleTippyHooks implements ParserFirstCallInitHook
 	public static function displayTooltip(Parser $parser, string $text, string $content)
 	{
 		$parser = MediaWikiServices::getInstance()->getParser();
+
 		$content = Sanitizer::removeSomeTags($content);
 		$content = $parser->recursiveTagParseFully($content);
 		$content = str_replace('"', "'", $content);
 		$content = trim($content);
 		$content = htmlspecialchars($content);
 
+		$text = $parser->recursiveTagParse($text);
+
 		// we can't use Html::element due to attributes escaping
 		$html = '<span class="simple-tippy-tooltip" ' .
 			'data-tippy-content="' . $content . '"' .
-			'>' . htmlspecialchars($text) . '</span>';
+			'>' . $text . '</span>';
 
 		$parser->getOutput()->addModules(['ext.simpletippy.core']);
 
